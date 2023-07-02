@@ -36,6 +36,5 @@ Create a new branch: git checkout -b feature/your-feature-name
 Make your changes and commit them: git commit -m 'Add some feature'
 Push the branch to your forked repository: git push origin feature/your-feature-name
 Create a pull request in the original repository.
-License
-This project is licensed under the MIT License.
+
 
