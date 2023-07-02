@@ -7,28 +7,27 @@ Browse recipes: Explore a wide variety of recipes with detailed information.
 Recipe details: View recipe instructions, ingredients, cooking time.
 Save and favorite recipes: Registered users can save their favorite recipes for quick access.
 Add new recipes: Authenticated users can contribute their own recipes to the app.
-Tech Stack
+###Tech Stack
 Frontend: React.js, HTML, CSS
 Backend: Node.js, Express.js
 Database: MongoDB
 Authentication: JSON Web Tokens (JWT)
 Other Libraries: Axios, Mongoose, bcrypt
-Installation
+###Installation
 To run this project locally, follow these steps:
 
 Clone the repository: git clone https://github.com/AmeneNeon/project-one
-Navigate to the project directory: cd client
+Navigate to the project directory: cd server
 Install dependencies: npm install
 Set up environment variables:
 Add the following environment variables:
-bash
-Copy code
 
 Replace your_secret_key with your preferred secret key for JWT authentication.
-Start the development server: npm start
+
+Start the development server:( npm start)
 The app should now be running on http://localhost:3000.
 
-Contributing
+###Contributing
 Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
 
 Fork the repository.
