@@ -1,20 +1,22 @@
+
 import axios from "axios";
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetUserIDt } from "../hooks/useGetUsetIDT";
+import {useCookies} from "react-cookie"
+
 function Home() {
   const [recipes, setRecipes] = useState([]);
   const [savedRecipes, setSavedRecipes] = useState([]);
+  const [cookies,_]=useCookies(["access_token"])
 
   const userID = useGetUserIDt();
-
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
         const response = await axios.get("http://localhost:3001/recipes");
         setRecipes(response.data);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
@@ -24,14 +26,15 @@ function Home() {
           `http://localhost:3001/recipes/savedRecipes/ids/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
-        console.log(response.data);
+        console.log(response.data.savedRecipes);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     };
 
     fetchRecipe();
-    fetchSavedRecipe();
+
+    if(cookies.access_token)fetchSavedRecipe();
   }, []);
 
   const saveRecipe = async (recipeID) => {
@@ -39,10 +42,11 @@ function Home() {
       const response = await axios.put("http://localhost:3001/recipes", {
         recipeID,
         userID,
-      });
+      },{headers:{authorization:cookies.access_token}});
       setSavedRecipes(response.data.savedRecipes)
+      console.log(response);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -54,14 +58,14 @@ function Home() {
       <ul>
         {recipes.map((recipe) => (
           <li key={recipe._id}>
-            {/* {savedRecipes.includes(recipe._id) &&<h1>ALREADY SAVED</h1>} */}
+            {/* {savedRecipes.includes(recipe._id)&& <h1>already saved</h1>} */}
             <div>
               <h2>{recipe.name}</h2>
               <button
                 onClick={() => saveRecipe(recipe._id)}
                 disabled={isRecipeSaved(recipe._id)}
               >
-                {isRecipeSaved(recipe._id)?"Saved" : "Save"}
+                {isRecipeSaved(recipe._id) ? "Saved" :"Save"}
               </button>
             </div>
             <div className="instructions">

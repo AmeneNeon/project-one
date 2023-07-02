@@ -21,11 +21,15 @@ function Navbar1() {
           <Nav className="me-auto ">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/create-recipe">Create Recipe</Nav.Link>
-            <Nav.Link href="/saved-recipes">Saved Recipes</Nav.Link>
+          
             {!cookies.access_token ? (
               <Nav.Link href="/auth">Login/Register</Nav.Link>
             ) : (
-              <button onClick={logout}>Logout</button>
+              <>
+                <Nav.Link href="/saved-recipe">Saved Recipes</Nav.Link>
+                <button onClick={logout}>Logout</button>
+              </>
+             
             )}
           </Nav>
         </Container>
