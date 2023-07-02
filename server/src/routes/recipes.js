@@ -13,6 +13,7 @@ router.get("/", async (req, res) => {
     res.json(error);
   }
 });
+
 router.post("/", async (req, res) => {
   const recipe = new RecipeModel(req.body);
   try {
@@ -22,34 +23,38 @@ router.post("/", async (req, res) => {
     res.json(error);
   }
 });
-
-router.post("/save", async (req, res) => {
+// save a recipe
+router.put("/", async (req, res) => {
+  
   try {
     const recipe = await RecipeModel.findById(req.body.recipeID);
-    const user = await RecipeModel.findById(req.body.userID);
+    const user = await UserModel.findById(req.body.userID);
     user.savedRecipes.push(recipe);
+
     await user.save();
     res.json({ savedRecipes: user.savedRecipes });
   } catch (error) {
     res.json(error);
   }
 });
-router.get("/savedRecipes/ids", async (req, res) => {
+// get id of saved recipes
+router.get("/savedRecipes/ids/:userID", async (req, res) => {
   try {
-    const user = await UserModel.findById(req.body.userID);
+    const user = await UserModel.findById(req.params.userID);
     res.json({ savedRecipes: user?.savedRecipes });
   } catch (error) {
     res.json(error);
   }
 });
-router.get("/savedRecipes", async (req, res) => {
+// get saved recipes
+router.get("/savedRecipes/:userID", async (req, res) => {
   try {
-    const user = await UserModel.findById(req.body.userID);
+    const user = await UserModel.findById(req.params.userID);
     const savedRecipes = await RecipeModel.find({
       _id: { $in: user.savedRecipes },
     });
 
-    res.json({ savedRecipes: user?.savedRecipes });
+    res.json({savedRecipes});
   } catch (error) {
     res.json(error);
   }

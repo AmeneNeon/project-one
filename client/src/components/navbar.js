@@ -14,14 +14,14 @@ function Navbar1() {
     navigate("/auth");
   };
   return (
-    <div>
+    <>
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
-          <Navbar.Brand href="/">Recipe</Navbar.Brand>
-          <Nav className="me-auto">
+          <Navbar.Brand href="#home">Recipe</Navbar.Brand>
+          <Nav className="me-auto ">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/create-recipe">Create Recipe</Nav.Link>
-            <Nav.Link href="/saved-recipe">saved Recipes</Nav.Link>
+            <Nav.Link href="/saved-recipes">Saved Recipes</Nav.Link>
             {!cookies.access_token ? (
               <Nav.Link href="/auth">Login/Register</Nav.Link>
             ) : (
@@ -30,7 +30,7 @@ function Navbar1() {
           </Nav>
         </Container>
       </Navbar>
-    </div>
+    </>
   );
 }
 
