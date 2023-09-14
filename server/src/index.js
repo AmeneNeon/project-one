@@ -6,7 +6,7 @@ import { recipeRouter } from "./routes/recipes.js";
 
 const app = express();
 app.use(express.json());
-app.use(cors())
+app.use(cors("http://localhost:3000","https://stunning-bublanina-281324.onrender.com))
 app.use("/auth",userRouter)
 app.use("/recipes",recipeRouter)
 
